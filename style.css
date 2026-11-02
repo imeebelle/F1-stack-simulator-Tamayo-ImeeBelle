@@ -19,6 +19,12 @@ body{
    
    
 }
+.peek {
+    background-color: hotpink;
+
+
+
+}
  .popped{
     display: flex;
     justify-content: flex-end;

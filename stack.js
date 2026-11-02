@@ -1,4 +1,3 @@
-
 class Stack {
     constructor() {
         this.items = []
@@ -13,6 +12,7 @@ class Stack {
         this.count += 1;
         let count=this.count -1;
         //return [push_res,count];
+        console.log(push_res);
         return [push_res, count];
     }
 
@@ -65,8 +65,31 @@ class Stack {
 const stack = new Stack()
 
 $(document).ready(function(){
-    $("#stack").prepend(`<div class="row bg-primary push">${stack.push(100)[0]}</div>`);
+    $("#push_btn").on("click",function(){
+        let push_data = stack.push($("#lagayan_ng_data").val());
+        $("#stack").prepend(`<div id="st${push_data[0]}"class="row bg-primary push">${push_data}</div>`);
+    });
+    $("#pop_btn").on("click",function(){
+        let pop_data = stack.pop();
+        $("#pop").prepend(`<div class="row pop text-bg-danger border border-light">${pop_data}</div>`);
+        $(`#st${pop_data}`).remove();
+    });
+    $("#peek_btn").on("click",function(){
+        let peek_data = stack.peek();
+        $(`#st${peek_data}`).removeClass("bg-primary").addClass("peek");
+        setTimeout(function() {
+            $(`#st${peek_data}`).removeClass("peek").addClass("bg-primary");
+        },1000);
+    });
+    $("#clear_btn").on("click",function(){
+        stack.clear();
+        $("#stack, #pop").empty();
+    });
+
+
+
+   /*  $("#stack").prepend(`<div class="row bg-primary push">${stack.push(100)[0]}</div>`);
     $("#stack").prepend(`<div class="row bg-success push">${stack.push(200)[0]}</div>`);
     $("#stack").prepend(`<div class="row bg-primary push">${stack.push(300)[0]}</div>`);
-    $("#stack").prepend(`<div class="row bg-success push">${stack.push(400)[0]}</div>`);
+    $("#stack").prepend(`<div class="row bg-success push">${stack.push(400)[0]}</div>`); */
 });
